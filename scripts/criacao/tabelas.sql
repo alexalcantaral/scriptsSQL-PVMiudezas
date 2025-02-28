@@ -1,5 +1,5 @@
 CREATE TABLE Funcionario (
-    Codigo INT PRIMARY KEY,
+    Codigo SERIAL PRIMARY KEY,
     DataAdmissao DATE NOT NULL DEFAULT CURRENT_DATE,
 	Salario DECIMAL(10,2) DEFAULT 1416,
     Nome VARCHAR(100) NOT NULL,
@@ -31,19 +31,20 @@ CREATE TABLE Venda (
 );
 
 CREATE TABLE Categoria (
-    Id INT PRIMARY KEY,
+    Id SERIAL PRIMARY KEY,
     Nome VARCHAR(50) NOT NULL UNIQUE
 );
 
 CREATE TABLE Produto (
-    Id INT PRIMARY KEY,
+    Id SERIAL PRIMARY KEY,
     Nome VARCHAR(150) NOT NULL,
     Descricao VARCHAR(300),
 	Marca VARCHAR(50) NOT NULL,
-    QuantEstoque INT NOT NULL CHECK (QuantEstoque >= 0),
+    QtdEstoque INT NOT NULL DEFAULT 0 CHECK (QtdEstoque >= 0),
     LocalizacaoEstoque VARCHAR(200) NOT NULL,
-    PrecoVenda DECIMAL(10,2) NOT NULL CHECK (PrecoVenda >= 0),
-    IdCategoria INT NOT NULL,
+    PrecoVenda DECIMAL(10,2) NOT NULL DEFAULT 0 CHECK (PrecoVenda >= 0),
+    UnidadeMedida VARCHAR(20)
+    IdCategoria SERIAL NOT NULL,
 
 	UNIQUE(Nome, Marca),
     FOREIGN KEY (IdCategoria) REFERENCES Categoria(Id)
@@ -51,10 +52,9 @@ CREATE TABLE Produto (
 
 CREATE TABLE ItemVenda (
     Subtotal DECIMAL(10,2) NOT NULL CHECK (Subtotal >= 0),
-    Quantidade DECIMAL(10,2) NOT NULL CHECK (Quantidade > 0),
-    CodVenda INT NOT NULL,
-    IdProduto INT NOT NULL,
-    PrecoCompra DECIMAL(10,2) NOT NULL CHECK (PrecoCompra >= 0),
+    Quantidade INT NOT NULL CHECK (Quantidade > 0),
+    CodVenda SERIAL NOT NULL,
+    IdProduto SERIAL NOT NULL,
 
     PRIMARY KEY (CodVenda, IdProduto),
     FOREIGN KEY (CodVenda) REFERENCES Venda(Codigo),
@@ -71,12 +71,13 @@ CREATE TABLE Fornecedor (
 CREATE TABLE ForneceProduto (
     CnpjFornecedor CHAR(14) NOT NULL,
     IdProduto INT NOT NULL,
-    Prazo DATE NOT NULL,
+    Ativo BOOLEAN NOT NULL DEFAULT TRUE,  -- Define se o fornecedor está ativo ou não
 
     PRIMARY KEY (CnpjFornecedor, IdProduto),
     FOREIGN KEY (IdProduto) REFERENCES Produto(Id),
     FOREIGN KEY (CnpjFornecedor) REFERENCES Fornecedor(Cnpj)
 );
+
 
 CREATE TABLE Pedido (
     Codigo INT PRIMARY KEY,
@@ -105,8 +106,10 @@ CREATE TABLE PedidoProduto (
 );
 
 CREATE TABLE MetodoPagamento (
-    Id INT PRIMARY KEY,
-    Tipo VARCHAR(50) NOT NULL UNIQUE,
+    Id SERIAL PRIMARY KEY,
+    Tipo VARCHAR(50) NOT NULL UNIQUE CHECK (Tipo IN ('Crédito', 'Débito', 'PIX', 'Dinheiro', 'Boleto')),
+    Descricao VARCHAR(100),
+    Taxa DECIMAL(5,2) DEFAULT 0 CHECK (Taxa >= 0), 
     Ativo BOOLEAN NOT NULL DEFAULT TRUE
 );
 
@@ -137,8 +140,8 @@ CREATE TABLE Entrega (
 
 CREATE TABLE NotaFiscal (
     NumeroSerie VARCHAR(50) NOT NULL UNIQUE,
-    ChaveAcesso CHAR(44) UNIQUE CHECK (ChaveAcesso ~ '^\d{44}$'),
+    ChaveAcesso CHAR(44) NOT NULL UNIQUE CHECK (ChaveAcesso ~ '^\d{44}$'),
     DataEmissao DATE NOT NULL DEFAULT CURRENT_DATE,
-    Id INT PRIMARY KEY,
+    Id SERIAL PRIMARY KEY,
     XmlNota XML NOT NULL
 );
