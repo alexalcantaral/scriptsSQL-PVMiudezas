@@ -32,18 +32,24 @@ CREATE INDEX idx_metodo_pagamento_id ON MetodoPagamento(Id);
 CREATE INDEX idx_metodo_pagamento_ativo ON MetodoPagamento(Ativo);
 
 -- Índices para a tabela Pagamento
-CREATE INDEX idx_pagamento_data ON Pagamento(DataPagamento);
+CREATE INDEX idx_pagamento_data ON Pagamento(Id);
+CREATE INDEX idx_pagamento_data ON Pagamento(CodVenda);
+CREATE INDEX idx_pagamento_data ON Pagamento(IdMetodoPagamento);
 
 -- Índices para a tabela Entrega
 CREATE INDEX idx_entrega_id ON Entrega(Id);
-CREATE INDEX idx_entrega_status ON Entrega(StatusEntrega);
+CREATE INDEX idx_entrega_status ON Entrega(CodVenda);
 
 -- Índices para a tabela NotaFiscal
 CREATE INDEX idx_nota_fiscal_id ON NotaFiscal(Id);
 
 -- Indices para ForneceProduto
-CREATE INDEX idx_ativo ON ForneceProduto(Ativo);
+CREATE INDEX idx_fornece_produto_ativo ON ForneceProduto(Ativo);
 
 -- Indices para ItemVenda
-CREATE INDEX idx_produto ON ItemVenda(IdProduto);
-CREATE INDEX idx_venda ON ItemVenda(CodVenda);
+CREATE INDEX idx_item_venda_idproduto ON ItemVenda(IdProduto);
+CREATE INDEX idx_item_venda_codvenda ON ItemVenda(CodVenda);
+
+-- Indices para PedidoProduto
+CREATE INDEX idx_pedido_produto_idproduto ON PedidoProduto(IdProduto);
+CREATE INDEX idx_pedido_produto_codvenda ON PedidoProduto(CodPedido);

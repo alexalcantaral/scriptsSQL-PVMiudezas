@@ -4,6 +4,7 @@ SELECT
     v.DataVenda,
     v.Subtotal AS SubtotalVenda,
     v.Desconto,
+    v.Status,
     v.CodFuncionario,
     f.Nome AS NomeFuncionario,
     c.Nome AS NomeCliente,
@@ -19,4 +20,4 @@ INNER JOIN
 LEFT OUTER JOIN
     Cliente c ON v.CpfCliente = c.Cpf
 INNER JOIN
-    Funcionario f ON v.CodFuncionario = f.Codigo;
+    Funcionario f ON v.CodFuncionario = f.Codigo
