@@ -1,22 +1,23 @@
-INSERT INTO ItemVenda (Subtotal, Quantidade, CodVenda, IdProduto) 
-VALUES 
     -- Venda 1: Total 150.00
-    ((SELECT calcular_subtotal(1, 3)), 3, 1, 1),  
-    ((SELECT calcular_subtotal(5, 1)), 1, 1, 5),  
+    CALL adicionar_item_venda(1,3,1)
+    CALL adicionar_item_venda(5,1,1) 
 
     -- Venda 2: Total 300.50
-    ((SELECT calcular_subtotal(2, 2)), 2, 2, 2),  
-    ((SELECT calcular_subtotal(3, 1)), 1, 2, 3),  
+    CALL adicionar_item_venda(2,2,2)
+    CALL adicionar_item_venda(3,1,2)   
 
     -- Venda 3: Total 50.00 (Sem cliente)
-    ((SELECT calcular_subtotal(3, 1)), 1, 3, 3),  
-    ((SELECT calcular_subtotal(4, 1)), 1, 3, 4),  
+    CALL adicionar_item_venda(3,1,3)
+    CALL adicionar_item_venda(4,1,3)   
 
     -- Venda 4: Total 500.00
-    ((SELECT calcular_subtotal(6, 5)), 5, 4, 6),  
-    ((SELECT calcular_subtotal(5, 1)), 1, 4, 5),  
-    ((SELECT calcular_subtotal(3, 1)), 1, 4, 3),  
+    CALL adicionar_item_venda(6,5,4)
+    CALL adicionar_item_venda(5,1,4) 
+    CALL adicionar_item_venda(3,1,4)  
 
     -- Venda 5: Total 200.00 (Sem cliente)
-    ((SELECT calcular_subtotal(2, 1)), 1, 5, 2),  
-    ((SELECT calcular_subtotal(3, 1)), 1, 5, 3);  
+    CALL adicionar_item_venda(2,1,5)
+    CALL adicionar_item_venda(3,1,5) 
+
+
+   

@@ -4,6 +4,8 @@ DECLARE
     v_TotalVenda DECIMAL(10,2);
     v_TotalPago DECIMAL(10,2);
     v_StatusVenda VARCHAR(20);
+	v_IdProduto INT;
+    v_Quantidade INT;
 BEGIN
     -- Pega o total da venda
     SELECT (Subtotal - Desconto) INTO v_TotalVenda FROM Venda WHERE Codigo = NEW.CodVenda;
@@ -40,6 +42,6 @@ $$ LANGUAGE plpgsql;
 
 -- Criar o gatilho
 CREATE TRIGGER gatilho_atualizar_status_venda
-AFTER INSERT ON Pagamento
+AFTER INSERT OR UPDATE ON Pagamento
 FOR EACH ROW
 EXECUTE FUNCTION atualizar_status_venda();

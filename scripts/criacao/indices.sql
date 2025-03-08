@@ -20,8 +20,8 @@ CREATE INDEX idx_produto_nome ON Produto(Nome);
 
 -- Índices para a tabela Fornecedor
 CREATE INDEX idx_fornecedor_cnpj ON Fornecedor(Cnpj);
-CREATE INDEX idx_fornecedor_cnpj ON Fornecedor(Nome);
-CREATE INDEX idx_fornecedor_cnpj ON Fornecedor(Ativo);
+CREATE INDEX idx_fornecedor_nome ON Fornecedor(Nome);
+CREATE INDEX idx_fornecedor_ativo ON Fornecedor(Ativo);
 
 -- Índices para a tabela Pedido
 CREATE INDEX idx_pedido_codigo ON Pedido(Codigo);
@@ -32,9 +32,8 @@ CREATE INDEX idx_metodo_pagamento_id ON MetodoPagamento(Id);
 CREATE INDEX idx_metodo_pagamento_ativo ON MetodoPagamento(Ativo);
 
 -- Índices para a tabela Pagamento
-CREATE INDEX idx_pagamento_data ON Pagamento(Id);
-CREATE INDEX idx_pagamento_data ON Pagamento(CodVenda);
-CREATE INDEX idx_pagamento_data ON Pagamento(IdMetodoPagamento);
+CREATE INDEX idx_pagamento_codvenda ON Pagamento(CodVenda);
+CREATE INDEX idx_pagamento_idmetodopagamento ON Pagamento(IdMetodoPagamento);
 
 -- Índices para a tabela Entrega
 CREATE INDEX idx_entrega_id ON Entrega(Id);

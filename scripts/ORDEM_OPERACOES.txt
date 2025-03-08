@@ -1,11 +1,29 @@
 1. Faça a criação das tabelas na ordem que esta no arquivo
 
-2. Crie as funcões e procedimentos
+2. Faça a criação dos indices das tabelas.
 
-3. Crie os gatilhos, suas respectivas funções e seus gatilhos
+3. Crie as funcões e procedimentos.
 
-4. Siga os arquivos de inserção, e vá inserindo normalmente.
+4. Crie os gatilhos, suas respectivas funções e seus gatilhos.
 
-5. Crie as views
+5. Siga os arquivos de inserção, e vá inserindo normalmente.
 
-6. Teste as consultas.
+IMPORTANTE - ORDEM DE INSERÇÃO:
+    categoria.sql
+    cliente.sql
+    fornecedor.sql
+    funcionario.sql
+    metodo_pagamento.sql
+    nota_fiscal.sql
+    produto.sql
+    fornece_produto.sql
+    venda.sql
+    item_venda.sql
+    entrega.sql
+    pagamento.sql
+    pedido.sql
+    pedido_produto.sql
+
+6. Crie as views
+
+7. Teste as consultas.
