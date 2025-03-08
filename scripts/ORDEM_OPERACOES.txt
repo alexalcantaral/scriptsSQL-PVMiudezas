@@ -1,0 +1,11 @@
+1. Faça a criação das tabelas na ordem que esta no arquivo
+
+2. Crie as funcões e procedimentos
+
+3. Crie os gatilhos, suas respectivas funções e seus gatilhos
+
+4. Siga os arquivos de inserção, e vá inserindo normalmente.
+
+5. Crie as views
+
+6. Teste as consultas.

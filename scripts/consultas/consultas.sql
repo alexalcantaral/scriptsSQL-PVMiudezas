@@ -117,6 +117,75 @@ LEFT OUTER JOIN Pagamento p ON mp.Id = p.IdMetodoPagamento
 GROUP BY mp.tipo
 ORDER BY COUNT(p.IdMetodoPagamento) DESC
 
+--Cálculo do faturamento e lucro com base nas vendas
+
+SELECT 
+    (SELECT SUM(subtotal) FROM Pedido) AS valorTotalPedidos, 
+    (SELECT SUM(subtotal - desconto) FROM Venda) AS valorTotalVendas,
+    ROUND(
+        (( (SELECT SUM(subtotal - desconto) FROM Venda) - (SELECT SUM(subtotal) FROM Pedido) ) 
+        / NULLIF((SELECT SUM(subtotal) FROM Pedido), 0) ) * 100, 2
+    ) AS percentualLucro
+
+
+--Lista dos clientes que já se associaram a vendas
+
+SELECT * 
+FROM Cliente c
+WHERE EXISTS (
+    SELECT cpfcliente FROM Venda v WHERE v.CPFCliente = c.CPF
+);
+
+--Todos os clientes que nunca compraram produtos da categoria 'Construcao'
+
+SELECT c.Nome
+FROM Cliente c
+WHERE NOT EXISTS (
+    SELECT 1 FROM Venda v 
+    INNER JOIN ItemVenda iv ON v.Codigo = iv.CodVenda
+    INNER JOIN Produto p ON iv.idProduto = p.Id
+	INNER JOIN Categoria ca ON p.IdCategoria = ca.Id
+    WHERE v.CPFCliente = c.CPF AND ca.nome = 'Construcao'
+);
+
+
+--Lista dos clientes que realizaram compras em determinado período.
+
+SELECT DISTINCT *
+FROM Cliente c
+JOIN Venda v ON c.CPF = v.CPFCliente
+WHERE v.DataVenda BETWEEN '2024-01-01' AND '2024-12-31';
+
+
+--Listar todos os clientes
+
+SELECT * FROM Cliente;
+
+
+--Listar todos os produtos  registrados que começam com a letra A
+
+SELECT *
+FROM Produto
+WHERE Nome ILIKE 'C%';
+
+
+--Listar todos os funcionários ordenados pela data de contratação
+
+SELECT *
+FROM Funcionario
+ORDER BY dataAdmissao;
+
+
+--Listar todas as vendas que foram feitas por um método de pagamento específico
+
+SELECT v.Codigo, v.DataVenda, v.Subtotal, mp.Tipo
+FROM Venda v
+INNER JOIN Pagamento p ON v.Codigo = p.CodVenda
+INNER JOIN MetodoPagamento mp ON p.IdMetodoPagamento = mp.Id
+WHERE mp.Tipo = 'Crédito';
+
+
+
 
 
 
