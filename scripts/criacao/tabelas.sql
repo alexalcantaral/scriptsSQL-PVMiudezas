@@ -51,7 +51,7 @@ CREATE TABLE Venda (
     DataVenda DATE NOT NULL DEFAULT CURRENT_DATE,
     Status VARCHAR(20) NOT NULL DEFAULT 'Pendente' CHECK (Status IN ('Pendente', 'Finalizada')),
     CodFuncionario INT NOT NULL,
-    CpfCliente CHAR(11) NOT NULL,
+    CpfCliente CHAR(11),
     NotaVenda INT,
     
     FOREIGN KEY (CodFuncionario) REFERENCES Funcionario(Codigo),
@@ -109,7 +109,7 @@ CREATE TABLE ForneceProduto (
 CREATE TABLE Pedido (
     Codigo SERIAL PRIMARY KEY,
     DataPedido DATE NOT NULL DEFAULT CURRENT_DATE,
-    Subtotal DECIMAL(10,2) NOT NULL CHECK (Subtotal >= 0),
+    Subtotal DECIMAL(10,2) NOT NULL DEFAULT 0 CHECK (Subtotal >= 0),
     StatusPedido VARCHAR(50) DEFAULT 'Pendente' CHECK (StatusPedido IN ('Pendente', 'Aprovado', 'Cancelado', 'Concluído')),
     CnpjFornecedor CHAR(14) NOT NULL,
     CodFuncionario INT NOT NULL,
