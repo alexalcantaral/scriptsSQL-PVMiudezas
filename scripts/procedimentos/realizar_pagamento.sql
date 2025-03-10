@@ -17,7 +17,7 @@ BEGIN
     -- Verifica se a venda já foi concluída
     SELECT Status INTO v_StatusVenda FROM Venda WHERE Codigo = v_CodVenda;
 
-    IF v_StatusVenda = 'Concluida' THEN
+    IF v_StatusVenda = 'Finalizada' THEN
         RAISE EXCEPTION 'Erro: A venda já foi concluída e não pode receber novos pagamentos.';
     END IF;
 

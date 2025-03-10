@@ -8,8 +8,8 @@ CALL processar_pagamento(2, 1, 165.50);  -- Pagamento com Crédito
 -- Venda 3 paga totalmente com Dinheiro
 CALL processar_pagamento(3, 4, 45.00);   -- Pagamento com Dinheiro
 
--- Venda 4 paga com Boleto e Crédito
-CALL processar_pagamento(4, 5, 200.00);  -- Pagamento com Boleto
+-- Venda 4 paga com PIX e Crédito
+CALL processar_pagamento(4, 3, 200.00);  -- Pagamento com Boleto
 CALL processar_pagamento(4, 1, 212.40);  -- Pagamento com Crédito
 
 -- Venda 5 paga com Débito e Dinheiro

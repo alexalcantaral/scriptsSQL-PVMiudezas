@@ -24,7 +24,7 @@ BEGIN
     -- Verifica se o total pago é igual ou maior que o total da venda
     IF v_TotalPago >= v_TotalVenda THEN
         -- Atualiza o status da venda para 'Concluida'
-        UPDATE Venda SET Status = 'Concluida' WHERE Codigo = NEW.CodVenda;
+        UPDATE Venda SET Status = 'Finalizada' WHERE Codigo = NEW.CodVenda;
 
         FOR v_IdProduto, v_Quantidade IN
             SELECT IdProduto, Quantidade FROM ItemVenda WHERE CodVenda = NEW.CodVenda
