@@ -19,6 +19,7 @@ IMPORTANTE - ORDEM DE INSERÇÃO:
     fornece_produto.sql
     venda.sql
     item_venda.sql
+    descontos.sql
     entrega.sql
     pagamento.sql
     pedido.sql
